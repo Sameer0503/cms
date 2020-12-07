@@ -24,7 +24,4 @@ class AdminsController extends Controller
         $request->user()->post()->create($validated_data);
         return back();
     }
-    public function view(){
-        return view('admin.posts.index');
-    }
 }
