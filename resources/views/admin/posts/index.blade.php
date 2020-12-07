@@ -7,6 +7,15 @@
             </div>
             <div class="card-body">
                 <div class="table-responsive">
+                    @if (Session::has('delete_messege'))
+                        <div class="alert alert-danger">
+                            {{Session::get('delete_messege')}}
+                        </div>
+                    @elseif (Session::has('create_messege'))
+                    <div class="alert alert-success">
+                        {{Session::get('create_messege')}}
+                    </div>
+                    @endif
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
@@ -17,6 +26,7 @@
                                 <th>Content</th>
                                 <th>Created</th>
                                 <th>Updated</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -28,6 +38,7 @@
                                 <th>Content</th>
                                 <th>Created</th>
                                 <th>Updated</th>
+                                <th>Delete</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -42,6 +53,13 @@
                                 <td>{{$post->body}}</td>
                                 <td>{{$post->created_at->diffForHumans()}}</td>
                                 <td>{{$post->updated_at->diffForHumans()}}</td>
+                                <td>
+                                    <form action="{{route('post.destroy', $post->id)}}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" name="delete" type="submit">Delete</button>
+                                    </form>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

@@ -22,6 +22,7 @@ class AdminsController extends Controller
             $validated_data['image'] = $request->file('image')->store('images');
         }
         $request->user()->post()->create($validated_data);
-        return back();
+        $request->session()->flash('create_messege','Post has been created');
+        return redirect()->route('post.index');
     }
 }
