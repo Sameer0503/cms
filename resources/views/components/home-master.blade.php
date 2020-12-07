@@ -38,7 +38,7 @@
           </li>
           @if(Auth::check())
             <li class="nav-item">
-              <a class="nav-link" href="{{route('admin')}}">Admin panel</a>
+              <a class="nav-link" href="{{route('admin.index')}}">Admin panel</a>
             </li>
           @else
             <li class="nav-item">
