@@ -6,7 +6,8 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    public function show(){
-        return view('post');
+    public function show(\App\Models\Post $post){
+        // dd($post);
+        return view('post',['post'=>$post]);
     }
 }

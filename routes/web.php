@@ -20,5 +20,10 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/admin', [AdminsController::class, 'index'])->name('admin');
-Route::get('/post',[PostController::class, 'show'])->name('post');
+Route::get('/post/{post}',[PostController::class, 'show'])->name('post');
+
+Route::middleware('auth')->group(function(){
+    Route::get('/admin', [AdminsController::class, 'index'])->name('admin.index');
+    Route::get('/admin/post/create', [AdminsController::class, 'create'])->name('post.create');
+    Route::post('/admin/post',[AdminsController::class, 'store'])->name('post.store');
+});
