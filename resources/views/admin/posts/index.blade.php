@@ -15,6 +15,10 @@
                     <div class="alert alert-success">
                         {{Session::get('create_messege')}}
                     </div>
+                    @elseif (Session::has('update_messege'))
+                    <div class="alert alert-primary">
+                        {{Session::get('update_messege')}}
+                    </div>
                     @endif
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -46,7 +50,13 @@
                             <tr>
                                 <td>{{$post->id}}</td>
                                 <td>{{$post->user->name}}</td>
-                                <td><a href="{{route('post.edit', $post->id)}}">{{$post->title}}</a></td>
+                                <td>
+                                    @can('update', $post)
+                                    <a href="{{route('post.edit', $post->id)}}">
+                                    @endcan
+                                        {{$post->title}}
+                                    </a>
+                                </td>
                                 <td>
                                     <img src="{{$post->image}}" class="img-thumbnail" alt=""> 
                                 </td>
@@ -54,11 +64,13 @@
                                 <td>{{$post->created_at->diffForHumans()}}</td>
                                 <td>{{$post->updated_at->diffForHumans()}}</td>
                                 <td>
+                                    @can('delete', $post)
                                     <form action="{{route('post.destroy', $post->id)}}" method="post">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-danger" name="delete" type="submit">Delete</button>
                                     </form>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach
@@ -75,6 +87,5 @@
 
         <!-- Page level custom scripts -->
         <script src="{{asset('js/demo/datatables-demo.js')}}"></script>
-
     @endsection
 </x-admin-master>
