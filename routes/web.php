@@ -24,6 +24,13 @@ Route::get('/post/{post}',[PostController::class, 'show'])->name('post');
 
 Route::middleware('auth')->group(function(){
     Route::get('/admin', [AdminsController::class, 'index'])->name('admin.index');
-    Route::get('/admin/post/create', [AdminsController::class, 'create'])->name('post.create');
+    Route::get('/admin/post',[PostController::class, 'index'])->name('post.index');
+
     Route::post('/admin/post',[AdminsController::class, 'store'])->name('post.store');
+    Route::get('/admin/post/create', [AdminsController::class, 'create'])->name('post.create');
+
+    Route::get('/admin/post/{post}', [PostController::class, 'edit'])->name('post.edit');
+    Route::patch('/admin/post/{post}', [PostController::class, 'patch'])->name('post.patch');
+
+    Route::delete('/admin/post/{post}', [PostController::class, 'destroy'])->name('post.destroy');
 });

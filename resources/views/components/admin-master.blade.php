@@ -56,9 +56,7 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <x-admin-sidebar-post-links>
-
-      </x-admin-sidebar-post-links>
+      <x-admin-sidebar-post-links/>
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
@@ -379,6 +377,8 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{{asset('js/sb-admin-2.js')}}"></script>
+
+  @yield('scripts')
 
 </body>
 
